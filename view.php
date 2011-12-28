@@ -1,5 +1,7 @@
 <?php
 
+
+
 require("db.php");
 		
 			try {
@@ -12,11 +14,24 @@ require("db.php");
 		$pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
 		
 		
+	
+	if($_GET['sort']==1){
+		$stmt = $pdo -> query("SELECT * FROM zadanie  WHERE ukryj='0' ORDER BY tresc  ASC;");
+		}
+	else if($_GET['sort']==0){
+		$stmt = $pdo -> query("SELECT * FROM zadanie  WHERE ukryj='0' ORDER BY tresc  DESC;");
+	}
+	else
 		$stmt = $pdo -> query("SELECT * FROM zadanie WHERE ukryj='0';");
 		
-		
+?>
+		<a href="view.php?sort=1">Sortuj A-Z</a>
+		<a href="view.php?sort=0">Sortuj A-Z</a>
+	
+<?php	
     echo '<ul>';
-		
+	
+	
     foreach($stmt as $row)
     {
       echo "<tr>
@@ -68,7 +83,10 @@ require("db.php");
 	<br>Wyszukiwanie:
 	<form method="post" action="search.php">
 	<input type="text" name="SzukanaNazwa"/>
-	
 	</form>
+	
+	
+	
+	
 	
 	
