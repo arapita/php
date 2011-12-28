@@ -6,4 +6,7 @@ $username = 'root';
 $password = 'dosome12';
 $database = 'mysql';
 
+
+
+//arapita to zuy czlowieks
 ?>
