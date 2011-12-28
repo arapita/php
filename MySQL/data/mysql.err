@@ -1,0 +1,30 @@
+111116 13:12:01 [Note] C:\AppServ\MySQL\bin\mysqld-nt: ready for connections.
+Version: '5.0.51b-community-nt-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+111116 13:12:05 [Note] C:\AppServ\MySQL\bin\mysqld-nt: Normal shutdown
+
+111116 13:12:05 [Note] C:\AppServ\MySQL\bin\mysqld-nt: Shutdown complete
+
+111116 13:12:11 [Note] C:\AppServ\MySQL\bin\mysqld-nt: ready for connections.
+Version: '5.0.51b-community-nt-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+111116 15:29:52 [Note] C:\AppServ\MySQL\bin\mysqld-nt: ready for connections.
+Version: '5.0.51b-community-nt-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+111116 23:03:30 [Note] C:\AppServ\MySQL\bin\mysqld-nt: Normal shutdown
+
+111116 23:03:31 [Note] C:\AppServ\MySQL\bin\mysqld-nt: Shutdown complete
+
+111117 10:09:24 [Note] C:\AppServ\MySQL\bin\mysqld-nt: ready for connections.
+Version: '5.0.51b-community-nt-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+111118  0:10:37 [Note] C:\AppServ\MySQL\bin\mysqld-nt: Normal shutdown
+
+111118  0:10:38 [Note] C:\AppServ\MySQL\bin\mysqld-nt: Shutdown complete
+
+111118  8:33:27 [Note] C:\AppServ\MySQL\bin\mysqld-nt: ready for connections.
+Version: '5.0.51b-community-nt-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+111227 15:43:59 [Note] C:\AppServ\MySQL\bin\mysqld-nt: ready for connections.
+Version: '5.0.51b-community-nt-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+111228  3:50:39 [Note] C:\AppServ\MySQL\bin\mysqld-nt: Normal shutdown
+
+111228  3:50:41 [Note] C:\AppServ\MySQL\bin\mysqld-nt: Shutdown complete
+
+111228 10:05:47 [Note] C:\AppServ\MySQL\bin\mysqld-nt: ready for connections.
+Version: '5.0.51b-community-nt-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
