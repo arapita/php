@@ -16,13 +16,13 @@ require("db.php");
 		
 	
 	if($_GET['sort']==1){
-		$stmt = $pdo -> query("SELECT * FROM zadanie  WHERE ukryj='0' ORDER BY tresc  ASC;");
+		$stmt = $pdo -> query("SELECT * FROM zadanie  WHERE ukryj='0' AND usun='0' ORDER BY tresc  ASC;");
 		}
 	else if($_GET['sort']==0){
-		$stmt = $pdo -> query("SELECT * FROM zadanie  WHERE ukryj='0' ORDER BY tresc  DESC;");
+		$stmt = $pdo -> query("SELECT * FROM zadanie  WHERE ukryj='0' AND usun='0' ORDER BY tresc  DESC;");
 	}
 	else
-		$stmt = $pdo -> query("SELECT * FROM zadanie WHERE ukryj='0';");
+		$stmt = $pdo -> query("SELECT * FROM zadanie WHERE ukryj='0' AND usun='0';");
 		
 ?>
 		<a href="view.php?sort=1">Sortuj A-Z</a>
@@ -63,7 +63,7 @@ require("db.php");
 		
 		</br>
 	    <a href="editForm.php?id=<?php echo $row['id_zadanie']?>">Edytuj</a>
-		<a href="delete.php?id=<?php echo $row['id_zadanie']?>">Usun</a>
+		<a href="delete.php?usun=1&id=<?php echo $row['id_zadanie']?>">Usun</a>
 		
 		<?php } ?>
 
@@ -78,7 +78,7 @@ require("db.php");
     echo '</ul>';
 ?>		
 
-	<a href="add.html">Dodaj nowe zadanie</a>
+	<a href="add.php">Dodaj nowe zadanie</a>
 	
 	<br>Wyszukiwanie:
 	<form method="post" action="search.php">

@@ -2,6 +2,7 @@
 require("db.php");
 
 $id = $_GET['id'];
+$usun = $_GET['usun'];
 if (!$id) {
 echo $komunikat = "<span class='error'>Z³e parametry<span>";
 exit;
@@ -17,8 +18,11 @@ try {
 		$pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
 
 
-$stmt = $pdo -> query("DELETE FROM zadanie WHERE id_zadanie='$id';");
-$komunikat = "Zadanie zostalo usuniete";
+if($usun==1){
+$stmt = $pdo -> query("UPDATE zadanie SET usun='1' WHERE id_zadanie='$id';");
+}
+
+$komunikat = "Zadanie zostalo oznaczone do usuniecia";
 
 /*
 if ($ukryj == 0 ) {

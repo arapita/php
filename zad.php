@@ -39,8 +39,8 @@ $database = 'mysql';
 			$stmt -> bindValue(':data_dodania', date("Y/m/d") , PDO::PARAM_INT);
 			$stmt -> bindValue(':data_modyfikacji', date("Y/m/d") , PDO::PARAM_INT);
 			$stmt -> bindValue(':poziom_trudnosci', $_POST['poziom_trudnosci'], PDO::PARAM_INT);
-			$stmt -> bindValue(':usun', $_POST['usun'], PDO::PARAM_BOOL);
-			$stmt -> bindValue(':ukryj', $_POST['ukryj'], PDO::PARAM_BOOL);
+			$stmt -> bindValue(':usun', $_POST['usun'], PDO::PARAM_INT);
+			$stmt -> bindValue(':ukryj', $_POST['ukryj'], PDO::PARAM_INT);
 			
 			$ilosc = $stmt -> execute(); // 3
 
