@@ -42,15 +42,45 @@ $database = 'mysql';
 			$stmt -> bindValue(':usun', $_POST['usun'], PDO::PARAM_INT);
 			$stmt -> bindValue(':ukryj', $_POST['ukryj'], PDO::PARAM_INT);
 			
+			
+			
 			$ilosc = $stmt -> execute(); // 3
 
 			if($ilosc > 0){
-							echo 'Dodano: '.$ilosc.' rekordow';
+							echo 'Dodano: '.$ilosc.' rekordow<br />';
 			}
 			else{
 							echo 'Wystapil blad podczas dodawania rekordow!';
 			}
+		
+			$tresc=$_POST['tresc'];
+			
+			$stmt = $pdo -> query("SELECT id_zadanie FROM zadanie WHERE tresc='$tresc'");
+			
+			foreach($stmt as $row){
+	  
+			$id_zad=$row['id_zadanie'];
+	
 		}
+		
+			$kat=$_POST['kategoria'];
+			if ($kat){
+			foreach ($kat as $t){
+		
+			$stmt = $pdo -> query("SELECT id_kategoria FROM kategoria WHERE nazwa='$t'");
+			
+			foreach($stmt as $row){
+	  
+			$id_kat=$row['id_kategoria'];
+	  
+		}
+			$stmt = $pdo -> query("INSERT INTO zadanie_kategoria (id_kategoria, id_zadanie) VALUES ($id_kat, $id_zad)");
+			}
+		}	
+	
+		}
+			
+		
 		else{
 			echo 'Nie przeslano danych metod? POST';      
 		}

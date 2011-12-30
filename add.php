@@ -20,9 +20,19 @@ echo '
 	
 	<input type="radio" name="ukryj" value="0" /> Widoczne
 	<input type="radio" name="ukryj" value="1" /> Niewidoczne<br />
+	
+	Wybierze kategorie:<br />
+	<select name="kategoria[]" multiple="multiple">
+	<option value="Matematyka">Matematyka</option>
+	<option value="Jezyk Polski">Jezyk Polski</option>
+	<option value="Historia">Historia</option>
+	<option value="Biologia">Biologia</option>
+	<option value="Informatyka">Informatyka</option>
+	<option value="Geografia">Geografia</option>
+	</select>
 
 
-	<input type="submit" value="Dodaj"/>
+	<br /><input type="submit" value="Dodaj"/>
 
 </form>'
 ?>

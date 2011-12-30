@@ -26,7 +26,7 @@ require("db.php");
 		
 ?>
 		<a href="view.php?sort=1">Sortuj A-Z</a>
-		<a href="view.php?sort=0">Sortuj A-Z</a>
+		<a href="view.php?sort=0">Sortuj Z-A</a>
 	
 <?php	
     echo '<ul>';
@@ -38,7 +38,20 @@ require("db.php");
 			
 			Tresc zadania: <table width=\"300\" border=\"1\"> <td width=\"6%\">".$row['tresc']."</td></br> </table>
 			Rozwiazanie:  <table width=\"300\" border=\"1\"> <td width=\"6%\">".$row['rozwiazanie']."</td></br> </table>
-			Poziom trudnosci: <td width=\"2%\">".$row['poziom_trudnosci']."</td> </br>
+			Poziom trudnosci: <td width=\"2%\">".$row['poziom_trudnosci']."</td> ";
+		
+		/*$stm = $pdo -> query("SELECT a.nazwa, b.tresc FROM kategoria a, zadanie b, zadanie_kategoria ak WHERE a.id_kategoria=ak.id_kategoria AND ak.id_zadanie=59;");
+		//$id_cos=$row['id_zadanie'];
+		//$stm = pdo -> query("SELECT a.nazwa FROM kategoria a, zadanie b, zadanie_kategoria ak WHERE a.id_kategoria=ak.id_kategoria AND ak.id_zadanie='$id_cos'");
+			echo "Kategoria: <br />";
+			
+			foreach($stm as $ro){
+			echo "<tr> <td width=\"2%\">".$ro['nazwa']."</td> <br />";
+			
+			}*/
+			
+			
+	  echo "
 			Data dodania: <td width=\"2%\">".$row['data_dodania']."</td> 
 			Data modyfikacji: <td width=\"2%\">".$row['data_modyfikacji']."</td>			
 			
