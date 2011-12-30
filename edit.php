@@ -21,10 +21,47 @@ try {
 			
 		$pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
 			
-		//$stmt = $pdo -> prepare('UPDATE zadanie SET (tresc, rozwiazanie, poziom_trudnosci) INTO zadanie
+			
+			$tresc=$_POST['tresc'];
+			
+			$stmt = $pdo -> query("SELECT id_zadanie FROM zadanie WHERE tresc='$tresc'");
+			
+			foreach($stmt as $row){
+	  
+			$id_zad=$row['id_zadanie'];
+	
+		}
+		
+			$kat=$_POST['kategoria'];
+			if ($kat){
+			foreach ($kat as $t){
+		
+			$stmt = $pdo -> query("SELECT id_kategoria FROM kategoria WHERE nazwa='$t'");
+			
+			foreach($stmt as $row){
+	  
+			$id_kat=$row['id_kategoria'];
+	  
+		}
+			//nie przyjmuje id_kategorii w zapytaniu sql
+			$stmt = $pdo -> query("SELECT id_zadanie_kat FROM zadanie_kategoria WHERE id_kategoria=$id_kat AND id_zadanie=64");
+			
+			foreach($stmt as $row){
+			//echo "$id_kat ,";
+			
+			$id_zad_kat=$row['id_zadanie_kat'];
+			}
+			
+			echo "".$id_zad_kat;
+			
+			
+			//$stmt = $pdo -> query("UPDATE zadanie_kategoria SET id_kategoria='$id_kat', id_zadanie='$id_zad' WHERE id_zadanie_kat='$id_zad_kat'");
+			}
+		}
 
-		$stmt = $pdo -> query("UPDATE zadanie SET tresc='$tresc', rozwiazanie='$rozwiazanie', data_modyfikacji='$dataMod', 
+			$stmt = $pdo -> query("UPDATE zadanie SET tresc='$tresc', rozwiazanie='$rozwiazanie', data_modyfikacji='$dataMod', 
 								poziom_trudnosci='$poziom_trudnosci' WHERE id_zadanie='$id'");
+								
 	
 	$komunikat = "Zadanie zostalo zmodyfikowane";
 ?>

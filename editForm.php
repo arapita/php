@@ -33,8 +33,22 @@ echo '<p>Poziom trudnosci: <select name="poziom_trudnosci">
 		<option value="2">2</option>
 
 		<option value="3">3</option>
+		
+		<option value="4">4</option>
+		
+		<option value="5">5</option>
 
-	</select></p>';
+	</select></p>
+	
+	Wybierze kategorie:<br />
+	<select name="kategoria[]" multiple="multiple">
+	<option value="Matematyka">Matematyka</option>
+	<option value="Jezyk Polski">Jezyk Polski</option>
+	<option value="Historia">Historia</option>
+	<option value="Biologia">Biologia</option>
+	<option value="Informatyka">Informatyka</option>
+	<option value="Geografia">Geografia</option>
+	</select> <br />';
 
 }
  

@@ -50,17 +50,10 @@ Released   : 20111225
        
 			<div id="content">
 	
- <?php
-require("db.php");
-
-$id = $_GET['id'];
-$ukryj = $_GET['ukryj'];
-if (!$id) {
-echo $komunikat = "<span class='error'>Złe parametry<span>";
-exit;
-}
-
-try {
+    <?php
+    require("db.php");
+		
+			try {
       $pdo = new PDO('mysql:host='.$host.';dbname='.$database.
 	  	  ';port='.$port, $username, $password);
 			} catch (Exception $e) {
@@ -68,34 +61,85 @@ try {
 			}
 			
 		$pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-
-
-if($ukryj==1){
-$stmt = $pdo -> query("UPDATE zadanie SET ukryj='1' WHERE id_zadanie='$id';");
-$ilosc = 0;
-}
-else{
-$stmt = $pdo -> query("UPDATE zadanie SET ukryj='0' WHERE id_zadanie='$id';");
-$ilosc = 1;
-}
-
-if ($ukryj == 0 ) {
-if ($ilosc ) $komunikat = "Zadanie bedzie juz widoczne"; 
-else $komunikat = "<span class='error'>To zadanie bylo juz widoczne</span>";
-} elseif ($ukryj == 1 && $ilosc ) $komunikat = "Ukryto zadanie"; 
-else $komunikat = "<span class='error'>To zadanie jest juz ukryte</span>";
-
+		
+		
+	
+	if($_GET['sort']==1){
+		$stmt = $pdo -> query("SELECT * FROM zadanie ");
+		}
+	else if($_GET['sort']==0){
+		$stmt = $pdo -> query("SELECT * FROM zadanie");
+	}
+	else
+		$stmt = $pdo -> query("SELECT * FROM zadanie");
+		
 ?>
-
-<p id="commit" ><?php echo $komunikat?></p>
-<a href="view.php" >Powrót</a>
-
-	
-	
+		<a href="view.php?sort=1">Sortuj A-Z</a>
+		<a href="view.php?sort=0">Sortuj A-Z</a>
 	
     
         
+<?php
 
+foreach($stmt as $row)
+    {
+echo "
+
+
+
+  <div class='zadania'>
+				<h2 class='title'><a href='index.php'>".$row['tresc']."</a></h2>
+					<p class='meta'>&nbsp;
+                    
+   <tr>
+			
+			</td></br> </table>
+			Rozwiazanie:  ".$row['rozwiazanie']."</td></br> </table>
+			Poziom trudnosci: <td width=\"2%\">".$row['poziom_trudnosci']."</td> </br>
+			
+			Data dodania: <td width=\"2%\">".$row['data_dodania']."</td> <br /> 
+			Data modyfikacji: <td width=\"2%\">".$row['data_modyfikacji']."</td>			
+			
+			</tr></br>
+                    </p>
+</div>
+
+
+
+";
+
+<p class="label" >Widoczny:
+			
+		<span class="zwykly">
+
+		<?php if ($row['ukryj']) echo "NIE"; else echo "TAK";?>
+
+		<?php if (!$row['ukryj']) { ?>
+
+		<a href="ukryj.php?ukryj=1&id=<?php echo $row['id_zadanie']?>">Ukryj</a> 
+
+		<?php } else {?>
+
+		<a href="ukryj.php?ukryj=0&id=<?php echo $row['id_zadanie']?>">Pokaz</a>
+
+		<?php } if(!$row['usun']) { ?>
+		
+		</br>
+	    <a href="editForm.php?id=<?php echo $row['id_zadanie']?>">Edytuj</a>
+		<a href="delete.php?id=<?php echo $row['id_zadanie']?>">Usun</a>
+		
+		<?php } ?>
+
+		</span>
+		
+		
+			
+<?php 
+	}
+    $stmt -> closeCursor(); // zamkni?cie zbioru wynik?w 
+		
+	}
+?>
 
         	  
 			  <div style="clear: both;">&nbsp;</div>
