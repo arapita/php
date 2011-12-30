@@ -64,9 +64,8 @@ require("db.php");
 			}
 			
 		$pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-		
-		
 	
+
 	if($_GET['sort']==1){
 		$stmt = $pdo -> query("SELECT * FROM zadanie WHERE ukryj=0 AND usun=0 ORDER BY tresc ASC");
 		}
@@ -74,8 +73,28 @@ require("db.php");
 		$stmt = $pdo -> query("SELECT * FROM zadanie WHERE ukryj=0 AND usun=0 ORDER BY tresc DESC");
 	}
 	else
-		$stmt = $pdo -> query("SELECT * FROM zadanieWHERE ukryj=0 AND usun=0");
-		
+	$stmt = $pdo -> query("SELECT * FROM zadanieWHERE ukryj=0 AND usun=0");
+	
+	if($_GET['kategoria']=='mat'){
+		$stmt = $pdo -> query("SELECT * FROM zadanie a, zadanie_kategoria zk WHERE zk.id_kategoria=1 AND zk.id_zadanie=a.id_zadanie;");
+	}
+	if($_GET['kategoria']=='jp'){
+		$stmt = $pdo -> query("SELECT * FROM zadanie a, zadanie_kategoria zk WHERE zk.id_kategoria=2 AND zk.id_zadanie=a.id_zadanie;");
+	}
+	if($_GET['kategoria']=='his'){
+		$stmt = $pdo -> query("SELECT * FROM zadanie a, zadanie_kategoria zk WHERE zk.id_kategoria=3 AND zk.id_zadanie=a.id_zadanie;");
+	}
+	if($_GET['kategoria']=='bio'){
+		$stmt = $pdo -> query("SELECT * FROM zadanie a, zadanie_kategoria zk WHERE zk.id_kategoria=4 AND zk.id_zadanie=a.id_zadanie;");
+	}
+	if($_GET['kategoria']=='inf'){
+		$stmt = $pdo -> query("SELECT * FROM zadanie a, zadanie_kategoria zk WHERE zk.id_kategoria=5 AND zk.id_zadanie=a.id_zadanie;");
+	}
+	if($_GET['kategoria']=='geo'){
+		$stmt = $pdo -> query("SELECT * FROM zadanie a, zadanie_kategoria zk WHERE zk.id_kategoria=6 AND zk.id_zadanie=a.id_zadanie;");
+	}
+	
+	
 ?>
 		<a href="view.php?sort=1">Sortuj A-Z</a>
 		<a href="view.php?sort=0">Sortuj A-Z</a>
@@ -122,6 +141,13 @@ require("db.php");
 
 	<a href="add.php">Dodaj nowe zadanie</a> <br />
 	<a href="TaskManager.php">Menadzer zadan</a>
+	
+	<a href="view.php?kategoria=mat">Matematyka</a>
+	<a href="view.php?kategoria=jp">Jezyk Polski</a>
+	<a href="view.php?kategoria=his">Historia</a>
+	<a href="view.php?kategoria=bio">Biologia</a>
+	<a href="view.php?kategoria=inf">Informatyka</a>
+	<a href="view.php?kategoria=geo">Geografia</a>
 	
 	<br>Wyszukiwanie:
 	<form method="post" action="search.php">
