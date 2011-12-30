@@ -65,40 +65,13 @@ require("db.php");
 			
 		$pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
 	
+	$id_zad=$_GET['id'];
 	
-	if($_GET['sort']==1){
-		$stmt = $pdo -> query("SELECT * FROM zadanie WHERE ukryj=0 AND usun=0 ORDER BY tresc ASC");
-		}
-	else if($_GET['sort']==0){
-		$stmt = $pdo -> query("SELECT * FROM zadanie WHERE ukryj=0 AND usun=0 ORDER BY tresc DESC");
-	}
-	else
-	$stmt = $pdo -> query("SELECT * FROM zadanieWHERE ukryj=0 AND usun=0");
-	
-	if($_GET['kategoria']=='mat'){
-		$stmt = $pdo -> query("SELECT * FROM zadanie a, zadanie_kategoria zk WHERE zk.id_kategoria=1 AND zk.id_zadanie=a.id_zadanie;");
-	}
-	if($_GET['kategoria']=='jp'){
-		$stmt = $pdo -> query("SELECT * FROM zadanie a, zadanie_kategoria zk WHERE zk.id_kategoria=2 AND zk.id_zadanie=a.id_zadanie;");
-	}
-	if($_GET['kategoria']=='his'){
-		$stmt = $pdo -> query("SELECT * FROM zadanie a, zadanie_kategoria zk WHERE zk.id_kategoria=3 AND zk.id_zadanie=a.id_zadanie;");
-	}
-	if($_GET['kategoria']=='bio'){
-		$stmt = $pdo -> query("SELECT * FROM zadanie a, zadanie_kategoria zk WHERE zk.id_kategoria=4 AND zk.id_zadanie=a.id_zadanie;");
-	}
-	if($_GET['kategoria']=='inf'){
-		$stmt = $pdo -> query("SELECT * FROM zadanie a, zadanie_kategoria zk WHERE zk.id_kategoria=5 AND zk.id_zadanie=a.id_zadanie;");
-	}
-	if($_GET['kategoria']=='geo'){
-		$stmt = $pdo -> query("SELECT * FROM zadanie a, zadanie_kategoria zk WHERE zk.id_kategoria=6 AND zk.id_zadanie=a.id_zadanie;");
-	}
+	$stmt = $pdo -> query("SELECT * FROM zadanie WHERE id_zadanie=$id_zad");
 	
 	
 ?>
-		<a href="view.php?sort=1">Sortuj A-Z</a>
-		<a href="view.php?sort=0">Sortuj A-Z</a>
-	<br /> <br /><br />
+		
 <?php	
     echo '<ul>';
 	
@@ -131,31 +104,52 @@ require("db.php");
 			
 			</tr><br />";
 ?>			
-	
-		<a href="show.php?id=<?php echo $row['id_zadanie']?>">Pokaz zadanie</a><br />
-	
+			
 <?php 
 	}
-    $stmt -> closeCursor(); // zamkni?cie zbioru wynik?w 
+	
+	
+	echo '
+	
+		<form method="post" action="koment.php">
+		<input type="hidden" name="id" value="'.$id_z; echo '" />
+		<b>Komentarz: </b>
+		<p></br><textarea name="koment" rows="7" cols="50"></textarea></p>
 		
-    echo '</ul>';
-?>		
+		<p>Autor: <input type="text" name="autor"/></p>
+		<input type="hidden" name="usun" value="0"/>
+		<input type="hidden" name="ukryj" value="0"/>
+		<input type="hidden" name="czy_przeczytany" value="0"/>
+	
+		<input type="submit" value="Dodaj"/>
+		</form>
+	';
 
-	<a href="add.php">Dodaj nowe zadanie</a> <br />
-	<a href="TaskManager.php">Menadzer zadan</a>
 	
-	<a href="view.php?kategoria=mat">Matematyka</a>
-	<a href="view.php?kategoria=jp">Jezyk Polski</a>
-	<a href="view.php?kategoria=his">Historia</a>
-	<a href="view.php?kategoria=bio">Biologia</a>
-	<a href="view.php?kategoria=inf">Informatyka</a>
-	<a href="view.php?kategoria=geo">Geografia</a>
+    echo '</ul>';
 	
-	<br>Wyszukiwanie:
-	<form method="post" action="search.php">
-	<input type="text" name="SzukanaNazwa"/>
-	</form>
 	
+	$stmt = $pdo -> query("SELECT * FROM komentarz a, zadanie b WHERE a.id_zadanie=$id_z AND b.id_zadanie=a.id_zadanie ORDER BY data_komentarz DESC");
+	
+	echo "<font size=4><b>Komentarze:</b></font>";
+	
+	foreach($stmt as $row)
+    {
+     echo "
+		
+	  <tr>
+			
+			<b></b> <table width=\"400\" height=\"50\" border=\"1\"> <td width=\"7%\">".$row['komentarz']."</td></table>
+			<b>Autor:</b> <td width=\"2%\">".$row['autor']."</td>,  
+			<b>Data dodania:</b> <td width=\"2%\">".$row['data_komentarz']."</td><br />
+			
+			</tr><br />";
+	}
+	
+    $stmt -> closeCursor(); // zamkni?cie zbioru wynik?w 
+	
+	
+?>			
         	  
 			  <div style="clear: both;">&nbsp;</div>
               
